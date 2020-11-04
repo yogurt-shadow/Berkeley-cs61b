@@ -1,4 +1,4 @@
-public class Body{
+public class Planet{
 	public double xxPos;
 	public double yyPos;
 	public double xxVel;
@@ -6,7 +6,7 @@ public class Body{
 	public double mass;
 	public String imgFileName;
 
-	public Body(double xp, double yp, double xV, double yV, double m, String img){
+	public Planet(double xp, double yp, double xV, double yV, double m, String img){
 		xxPos = xp;
 		yyPos = yp;
 		xxVel = xV;
@@ -15,7 +15,7 @@ public class Body{
 		imgFileName = img;
 	}
 
-	public Body(Body b){
+	public Planet(Planet b){
 		this.xxPos = b.xxPos;
 		this.yyPos = b.yyPos;
 		this.xxVel = b.xxVel;
@@ -24,32 +24,32 @@ public class Body{
 		this.imgFileName = b.imgFileName;
 	}
 	
-	public double calcDistance(Body b){
+	public double calcDistance(Planet b){
 		double xdis = this.xxPos - b.xxPos;
 		double ydis = this.yyPos - b.yyPos;
 		double distance = Math.sqrt(xdis * xdis + ydis * ydis);
 		return distance;
 	}
 
-	public double calcForceExertedBy(Body b){
+	public double calcForceExertedBy(Planet b){
 		final double G = 6.67e-11;
 		double force = G * this.mass * b.mass / Math.pow(this.calcDistance(b), 2);
 		return force;
 	}
 
-	public double calcForceExertedByX(Body b){
+	public double calcForceExertedByX(Planet b){
 		double dx = b.xxPos - this.xxPos;
 		double force_x = this.calcForceExertedBy(b) * dx / this.calcDistance(b);
 		return force_x;
 	}
 
-	public double calcForceExertedByY(Body b){
+	public double calcForceExertedByY(Planet b){
 		double dy = b.yyPos - this.yyPos;
 		double force_y = this.calcForceExertedBy(b) * dy / this.calcDistance(b);
 		return force_y;
 	}
 
-	public double calcNetForceExertedByX(Body[] b){
+	public double calcNetForceExertedByX(Planet[] b){
 		double sum_x = 0;
 		for(int i = 0; i < b.length; i++){
 			if(this.equals(b[i])){
@@ -62,7 +62,7 @@ public class Body{
 		return sum_x;
 	}
 
-	public double calcNetForceExertedByY(Body[] b){
+	public double calcNetForceExertedByY(Planet[] b){
 		double sum_y = 0;
 		for(int i = 0; i < b.length; i++){
 			if(this.equals(b[i])){
