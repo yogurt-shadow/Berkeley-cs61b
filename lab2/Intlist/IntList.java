@@ -83,7 +83,7 @@ public class IntList {
     public static IntList dcatenate(IntList A, IntList B) {
         //TODO:  fill in method
 
-        /**  recursive method
+        /**  recursive method  */
         if(A.rest == null){
             A.rest = B;
             return A;
@@ -92,17 +92,17 @@ public class IntList {
             A.rest = dcatenate(A.rest, B);
             return A;
         }
-         */
+         
 
-        /**  iterative method */
+        /**  iterative method 
         IntList p = A;
         while(p.rest != null){
             p = p.rest;
         }
         p.rest = B;
-        return A;
+        return A;*/
 
-    }
+    }  
 
     /**
      * Returns a list consisting of the elements of A followed by the
@@ -111,16 +111,16 @@ public class IntList {
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
 
-        /**  recursive method
+        /** recursive method  */
         if(A.rest == null){
             return new IntList(A.first, B);
         }
         else{
             return new IntList(A.first, catenate(A.rest, B));
          }
-            */
+            
 
-        /**  iterative method */
+        /**  iterative method 
         IntList result = new IntList(A.first, null);
         IntList p = result;
         while(A.rest != null){
@@ -129,7 +129,7 @@ public class IntList {
            p = p.rest;
         }
         p.rest = B;
-        return result;
+        return result;*/
     }
 
 
