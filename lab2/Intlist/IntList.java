@@ -84,8 +84,9 @@ public class IntList {
         //TODO:  fill in method
 
         /**  recursive method  */
-        if(A.rest == null){
-            A.rest = B;
+        if(A == null){
+        	A.first = B.first;
+            A.rest = B.rest;
             return A;
         }
         else{
@@ -112,8 +113,8 @@ public class IntList {
         //TODO:  fill in method
 
         /** recursive method  */
-        if(A.rest == null){
-            return new IntList(A.first, B);
+        if(A == null){
+            return new IntList(B.first, B.rest);
         }
         else{
             return new IntList(A.first, catenate(A.rest, B));
