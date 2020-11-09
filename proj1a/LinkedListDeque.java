@@ -1,14 +1,14 @@
-public class LinkedListDeque<Item>{
-	public IntNode first;
-	public IntNode last;
-	public int size;
+public class LinkedListDeque<T>{
+	private IntNode first;
+	private IntNode last;
+	private int size;
 
 	private class IntNode{
-		public Item item;
+		public T item;
 		public IntNode next;
 		public IntNode prev;
 
-		public IntNode(Item i, IntNode n, IntNode p){
+		public IntNode(T i, IntNode n, IntNode p){
 			item = i;
 			next = n;
 			prev = p;
@@ -21,19 +21,19 @@ public class LinkedListDeque<Item>{
 		size = 0;
 	}
 
-
+/**
 	public LinkedListDeque(LinkedListDeque other){
 
 		this.size = 0;
 		this.first = null;
 		this.last = null;
 		for(int j = 0; j < other.size; j++){
-			this.addLast((Item) other.get(j));
+			this.addLast((T) other.get(j));
 		}
-	}
+	}*/
 
 
-	public void addFirst(Item x){
+	public void addFirst(T x){
 		first = new IntNode(x, first, null);
 		size += 1;
 		if(first.next != null) {
@@ -44,7 +44,7 @@ public class LinkedListDeque<Item>{
 		}
 	}
 
-	public void addLast(Item x){
+	public void addLast(T x){
 		last = new IntNode(x, null, last);
 		size += 1;
 		if(last.prev != null) {
@@ -78,13 +78,13 @@ public class LinkedListDeque<Item>{
 	}
 	}
 
-	public Item removeFirst(){
+	public T removeFirst(){
 		if(this.isEmpty()){
 			return null;
 		}
 		else{
 			size -= 1;
-			Item result = first.item;
+			T result = first.item;
 			first = first.next;
 			if(first == null){  //empty now!
 				last = null;
@@ -95,13 +95,13 @@ public class LinkedListDeque<Item>{
 		}
 	}
 
-	public Item removeLast(){
+	public T removeLast(){
 		if(this.isEmpty()){
 			return null;
 		}
 		else{
 			size -= 1;
-			Item result = last.item;
+			T result = last.item;
 			last = last.prev;
 			if(last == null){  // empty now!
 				first = null;
@@ -113,7 +113,7 @@ public class LinkedListDeque<Item>{
 		
 	}
 
-	public Item get(int index){
+	public T get(int index){
 		int i = index;
 		IntNode p = first;
 		while(i != 0){
@@ -124,21 +124,21 @@ public class LinkedListDeque<Item>{
 	}
 
 	/** helper function. helps to get a new LinkedList removed first */
-	public LinkedListDeque getremove(){
+	/**public LinkedListDeque getremove(){
 		LinkedListDeque b = new LinkedListDeque(this);
 		b.removeFirst();
 		return b;
 	}
 
-	public Item getRecursive(int index){
+	public T getRecursive(int index){
 		if(index == 0){
 			return first.item;
 		}
 		else{
-			return (Item) this.getremove().getRecursive(index - 1);
+			return (T) this.getremove().getRecursive(index - 1);
 		}
 
-	}
+	}*/
 
 
 
