@@ -1,12 +1,13 @@
 public class ArrayDeque<T> {
-	private int size;
-	private T[] _Ts;
+    
+    private int size;
+	private T[] iTs;
 	private int nextfirst;
 	private int nextlast;
 
 	public ArrayDeque() {
 		size = 0;
-		_Ts = (T[]) new Object[8];
+		iTs = (T[]) new Object[8];
 		nextfirst = 0;
 		nextlast = 1;
 	}
@@ -15,8 +16,8 @@ public class ArrayDeque<T> {
 
 	/**public ArrayDeque(ArrayDeque other) {
 		this.size = other.size;
-		this._Ts = (T[]) new Object[other._Ts.length];
-		System.arraycopy(other._Ts, 0, _Ts, 0, other._Ts.length);
+		this.iTs = (T[]) new Object[other.iTs.length];
+		System.arraycopy(other.iTs, 0, iTs, 0, other.iTs.length);
 		this.nextfirst = 0;
 		this.nextlast = 1;
 	}
@@ -33,7 +34,7 @@ public class ArrayDeque<T> {
 		}
 		nextfirst = x - 1;
 		nextlast = size;
-		_Ts = home;
+		iTs = home;
 	}
 
 	private void upsize() {
@@ -41,11 +42,11 @@ public class ArrayDeque<T> {
 	}
 
 	private void downsize() {
-		resize(_Ts.length / 2);
+		resize(iTs.length / 2);
 	}
 
 	private boolean isFull() {
-		return size == _Ts.length;
+		return size == iTs.length;
 	}
 
 
@@ -53,11 +54,10 @@ public class ArrayDeque<T> {
 		if (isFull()) {
 			upsize();
 		}
-		_Ts[nextfirst] = i;
+		iTs[nextfirst] = i;
 		if (nextfirst == 0) {
-			nextfirst = _Ts.length - 1;
-		}
-		else {nextfirst--;}
+			nextfirst = iTs.length - 1;
+		} else { nextfirst--; }
 		size += 1;
 	}
 
@@ -65,11 +65,11 @@ public class ArrayDeque<T> {
 		if (isFull()) {
 			upsize();
 		}
-		_Ts[nextlast] = i;
-		if (nextlast == _Ts.length - 1) {
+		iTs[nextlast] = i;
+		if (nextlast == iTs.length - 1) {
 			nextlast = 0;
 		}
-		else {nextlast++;}
+		else { nextlast++; }
 		size += 1;
 	}
 
@@ -80,8 +80,7 @@ public class ArrayDeque<T> {
 	public void printDeque() {
 		if (this.isEmpty()) {
 			System.out.println("");
-		}
-		else {
+		} else {
 			for (int i = 0; i < size; i++) {
 				System.out.print(this.get(i) + " ");
 			}
@@ -89,79 +88,73 @@ public class ArrayDeque<T> {
 		}
 	}
 
-	public T removeFirst(){
-		if (size *4 < _Ts.length  && _Ts.length > 8) {
+	public T removeFirst() {
+		if (size * 4 < iTs.length  && iTs.length > 8) {
 			downsize();
 			if (size == 0) {
 				return null;
 			}
 			size -= 1;
-			if (nextfirst == _Ts.length - 1) {
+			if (nextfirst == iTs.length - 1) {
 				nextfirst = 0;
-			}
-			else {
+			} else {
 				nextfirst++;
 			}
-			T result = _Ts[nextfirst];
+			T result = iTs[nextfirst];
 			return result;
-		}
-		else {
+		} else {
 			if (size == 0) {
 				return null;
 			}
 			size -= 1;
-			if (nextfirst == _Ts.length - 1) {
+			if (nextfirst == iTs.length - 1) {
 				nextfirst = 0;
-			} 
-			else {
+			} else {
 				nextfirst++;
 			}
-			T result = _Ts[nextfirst];
-			_Ts[nextfirst] = null;
+			T result = iTs[nextfirst];
+			iTs[nextfirst] = null;
 			return result;
 		}
 	}
 
 	public T removeLast() {
-		if (size * 4 < _Ts.length && _Ts.length > 8) {
+		if (size * 4 < iTs.length && iTs.length > 8) {
 			downsize();
 			if (size == 0) {
 				return null;
 			}
 			size -= 1;
 			if (nextlast == 0) {
-				nextlast = _Ts.length - 1;
-			}
-			else {
+				nextlast = iTs.length - 1;
+			} else {
 				nextlast--;
 			}
-			T result = _Ts[nextlast];
+			T result = iTs[nextlast];
 			return result;
-		}
-		else {
+		} else {
 			if (size == 0) {
 				return null;
 			}
 			size -= 1;
 			if (nextlast == 0) {
-				nextlast = _Ts.length - 1;
-			}
-			else {
+				nextlast = iTs.length - 1;
+			} else {
 				nextlast--;
 			}
-			T result = _Ts[nextlast];
-			_Ts[nextlast] = null;
+			T result = iTs[nextlast];
+			iTs[nextlast] = null;
 			return result;
 		}
 	}
 
-	public T get(int index){
-		return _Ts[(nextfirst + 1 + index) % _Ts.length];
+	public T get(int index) {
+		return iTs[(nextfirst + 1 + index) % iTs.length];
 	}
 
 /**
 	public void showlength(){
-		System.out.println(_Ts.length);
+		System.out.println(iTs.length);
 	}
 	*/
 }
