@@ -27,8 +27,6 @@ public class ArrayDeque<T> {
         return size;
     }
 
-    ;
-
     private void resize(int x) {
         T[] home = (T[]) new Object[x];
         for (int i = 0; i < size; i++) {
