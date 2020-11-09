@@ -14,7 +14,7 @@ public class ArrayDeque<T> {
 
 
     
-	/**public ArrayDeque(ArrayDeque other) {
+    /**public ArrayDeque(ArrayDeque other) {
         this.size = other.size;
 	    this.iTs = (T[]) new Object[other.iTs.length];
 	    System.arraycopy(other.iTs, 0, iTs, 0, other.iTs.length);
