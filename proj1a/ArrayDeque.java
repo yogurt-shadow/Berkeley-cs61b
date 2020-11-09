@@ -10,18 +10,18 @@ public class ArrayDeque<T> {
         iTs = (T[]) new Object[8];
         nextfirst = 0;
         nextlast = 1;
-    }
+    } 
 
-	
 
+    
 	/**public ArrayDeque(ArrayDeque other) {
-		this.size = other.size;
-		this.iTs = (T[]) new Object[other.iTs.length];
-		System.arraycopy(other.iTs, 0, iTs, 0, other.iTs.length);
-		this.nextfirst = 0;
-		this.nextlast = 1;
-	}
-	*/
+        this.size = other.size;
+	    this.iTs = (T[]) new Object[other.iTs.length];
+	    System.arraycopy(other.iTs, 0, iTs, 0, other.iTs.length);
+	    this.nextfirst = 0;
+	    this.nextlast = 1;
+    }
+    */
 
     public int size() {
 	    return size;
