@@ -1,7 +1,7 @@
 public class LinkedListDeque<T> {
     
     private IntNode first;
-	private IntNode last;
+    private IntNode last;
 	private int size;
 
 	private class IntNode {

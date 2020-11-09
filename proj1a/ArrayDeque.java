@@ -1,11 +1,11 @@
 public class ArrayDeque<T> {
     
     private int size;
-	private T[] iTs;
-	private int nextfirst;
-	private int nextlast;
+    private T[] iTs;
+    private int nextfirst;
+    private int nextlast;
 
-	public ArrayDeque() {
+    public ArrayDeque() {
 		size = 0;
 		iTs = (T[]) new Object[8];
 		nextfirst = 0;
@@ -57,7 +57,9 @@ public class ArrayDeque<T> {
 		iTs[nextfirst] = i;
 		if (nextfirst == 0) {
 			nextfirst = iTs.length - 1;
-		} else { nextfirst--; }
+		} else { 
+			nextfirst--; 
+		}
 		size += 1;
 	}
 
@@ -68,8 +70,9 @@ public class ArrayDeque<T> {
 		iTs[nextlast] = i;
 		if (nextlast == iTs.length - 1) {
 			nextlast = 0;
+		} else { 
+			nextlast++; 
 		}
-		else { nextlast++; }
 		size += 1;
 	}
 
