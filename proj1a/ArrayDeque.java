@@ -58,7 +58,6 @@ public class ArrayDeque<T>{
 		}
 		else{nextfirst--;}
 		size += 1;
-
 	}
 
 	public void addLast(T i){
@@ -93,32 +92,32 @@ public class ArrayDeque<T>{
 		if(size *4 < Ts.length  && Ts.length > 8){
 			downsize();
 			if(size == 0){
-			return null;
-		}
-		size -= 1;
-		if(nextfirst == Ts.length - 1){
-			nextfirst = 0;
-		}
-		else{
-			nextfirst++;
-		}
-		T result = Ts[nextfirst];
+				return null;
+			}
+			size -= 1;
+			if(nextfirst == Ts.length - 1){
+				nextfirst = 0;
+			}
+			else{
+				nextfirst++;
+			}
+			T result = Ts[nextfirst];
 			return result;
 		}
-		else{
-		if(size == 0){
-			return null;
+		else {
+			if (size == 0) {
+				return null;
+			}
+			size -= 1;
+			if (nextfirst == Ts.length - 1) {
+				nextfirst = 0;
+			} else {
+				nextfirst++;
+			}
+			T result = Ts[nextfirst];
+			Ts[nextfirst] = null;
+			return result;
 		}
-		size -= 1;
-		if(nextfirst == Ts.length - 1){
-			nextfirst = 0;
-		}
-		else{
-			nextfirst++;
-		}
-		T result = Ts[nextfirst];
-		Ts[nextfirst] = null;
-		return result;}
 	}
 
 	public T removeLast() {
@@ -130,19 +129,22 @@ public class ArrayDeque<T>{
 			size -= 1;
 			if (nextlast == 0) {
 				nextlast = Ts.length - 1;
-			} else {
+			}
+			else {
 				nextlast--;
 			}
 			T result = Ts[nextlast];
 			return result;
-		} else {
+		}
+		else {
 			if (size == 0) {
 				return null;
 			}
 			size -= 1;
 			if (nextlast == 0) {
 				nextfirst = Ts.length - 1;
-			} else {
+			}
+			else {
 				nextlast--;
 			}
 			T result = Ts[nextlast];
@@ -152,7 +154,6 @@ public class ArrayDeque<T>{
 	}
 
 	public T get(int index){
-
 		return Ts[(nextfirst + 1 + index) % Ts.length];
 	}
 
@@ -167,7 +168,7 @@ public class ArrayDeque<T>{
 		}
 		a.printDeque();
 		for(int i = 0; i <= 996; i++){
-			a.removeLast();
+			a.removeFirst();
 		}
 		a.printDeque();
 		a.showlength();
