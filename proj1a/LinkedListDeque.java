@@ -65,7 +65,7 @@ public class LinkedListDeque<T> {
 
     public void printDeque() {
 	    if (this.isEmpty()) {
-	         System.out.println("");
+	        System.out.println("");
 	    } else {
 		    IntNode p = first;
 		    while (p != last) {
