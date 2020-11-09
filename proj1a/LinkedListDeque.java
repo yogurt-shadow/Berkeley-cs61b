@@ -1,45 +1,44 @@
-public class LinkedListDeque<T>{
+public class LinkedListDeque<T> {
 	private IntNode first;
 	private IntNode last;
 	private int size;
 
-	private class IntNode{
+	private class IntNode {
 		public T item;
 		public IntNode next;
 		public IntNode prev;
 
-		public IntNode(T i, IntNode n, IntNode p){
+		public IntNode(T i, IntNode n, IntNode p) {
 			item = i;
 			next = n;
 			prev = p;
 		}
 	}
 
-	public LinkedListDeque(){
+	public LinkedListDeque() {
 		first = null;
 		last = null;
 		size = 0;
 	}
 
 
-	public LinkedListDeque(LinkedListDeque other){
-
-		this.size = 0;
-		this.first = null;
-		this.last = null;
-		for(int j = 0; j < other.size; j++){
-			this.addLast((T) other.get(j));
+	private LinkedListDeque copy() {
+		LinkedListDeque<T> result = new LinkedListDeque<T>();
+		for (int j = 0; j < this.size; j++) {
+			result.addLast((T) this.get(j));
 		}
+		return result;
 	}
+
 
 
 	public void addFirst(T x){
 		first = new IntNode(x, first, null);
 		size += 1;
-		if(first.next != null) {
+		if (first.next != null) {
 			first.next.prev = first;
 		}
-		if(last == null){
+		if (last == null) {
 			last = first;
 		}
 	}
@@ -47,10 +46,10 @@ public class LinkedListDeque<T>{
 	public void addLast(T x){
 		last = new IntNode(x, null, last);
 		size += 1;
-		if(last.prev != null) {
+		if (last.prev != null) {
 			last.prev.next = last;
 		}
-		if(first == null){
+		if (first == null) {
 			first = last;
 		}
 	}
@@ -64,12 +63,12 @@ public class LinkedListDeque<T>{
 	}
 
 	public void printDeque(){
-		if(this.isEmpty()){
+		if (this.isEmpty()) {
 			System.out.println("");
 		}
 		else{
 			IntNode p = first;
-			while(p != last){
+			while (p != last) {
 				System.out.print(p.item + " ");
 				p = p.next;
 			}
@@ -78,15 +77,15 @@ public class LinkedListDeque<T>{
 		}
 	}
 
-	public T removeFirst(){
-		if(this.isEmpty()){
+	public T removeFirst() {
+		if (this.isEmpty()) {
 			return null;
 		}
-		else{
+		else {
 			size -= 1;
 			T result = first.item;
 			first = first.next;
-			if(first == null){  //empty now!
+			if (first == null) {  //empty now!
 				last = null;
 				return result;
 			}
@@ -95,8 +94,8 @@ public class LinkedListDeque<T>{
 		}
 	}
 
-	public T removeLast(){
-		if(this.isEmpty()){
+	public T removeLast() {
+		if (this.isEmpty()) {
 			return null;
 		}
 		else {
@@ -112,10 +111,10 @@ public class LinkedListDeque<T>{
 		}
 	}
 
-	public T get(int index){
+	public T get(int index) {
 		int i = index;
 		IntNode p = first;
-		while(i != 0){
+		while (i != 0) {
 			p = p.next;
 			i--;
 		}
@@ -123,33 +122,18 @@ public class LinkedListDeque<T>{
 	}
 
 	/** helper function. helps to get a new LinkedList removed first */
-	public LinkedListDeque getremove(){
-		LinkedListDeque b = new LinkedListDeque(this);
+	private LinkedListDeque getremove() {
+		LinkedListDeque b = this.copy();
 		b.removeFirst();
 		return b;
 	}
 
-	public T getRecursive(int index){
-		if(index == 0){
+	public T getRecursive(int index) {
+		if (index == 0) {
 			return first.item;
 		}
 		else{
 			return (T) this.getremove().getRecursive(index - 1);
 		}
-	}
-
-
-
-
-
-	public static void main(String[] args){
-		LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
-		lld1.addFirst(10);
-		lld1.addLast(5);
-		lld1.addFirst(20);
-		lld1.addFirst(50);
-		lld1.printDeque();
-		System.out.println(lld1.get(2));
-		System.out.println(lld1.getRecursive(2));
 	}
 }
