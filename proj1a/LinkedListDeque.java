@@ -21,7 +21,7 @@ public class LinkedListDeque<T>{
 		size = 0;
 	}
 
-/**
+
 	public LinkedListDeque(LinkedListDeque other){
 
 		this.size = 0;
@@ -30,7 +30,7 @@ public class LinkedListDeque<T>{
 		for(int j = 0; j < other.size; j++){
 			this.addLast((T) other.get(j));
 		}
-	}*/
+	}
 
 
 	public void addFirst(T x){
@@ -124,7 +124,7 @@ public class LinkedListDeque<T>{
 	}
 
 	/** helper function. helps to get a new LinkedList removed first */
-	/**public LinkedListDeque getremove(){
+	public LinkedListDeque getremove(){
 		LinkedListDeque b = new LinkedListDeque(this);
 		b.removeFirst();
 		return b;
@@ -138,7 +138,7 @@ public class LinkedListDeque<T>{
 			return (T) this.getremove().getRecursive(index - 1);
 		}
 
-	}*/
+	}
 
 
 

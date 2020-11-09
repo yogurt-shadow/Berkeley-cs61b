@@ -11,7 +11,7 @@ public class ArrayDeque<T>{
 		nextlast = 1;
 	}
 
-	/**
+	
 
 	public ArrayDeque(ArrayDeque other){
 		this.size = other.size;
@@ -19,7 +19,7 @@ public class ArrayDeque<T>{
 		System.arraycopy(other.Ts, 0, Ts, 0, other.Ts.length);
 		this.nextfirst = 0;
 		this.nextlast = 1;
-	}*/
+	}
 
 	public int size() {
 		return size;
