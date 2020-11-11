@@ -1,4 +1,5 @@
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class TestPalindrome {
@@ -17,7 +18,7 @@ public class TestPalindrome {
     }
 
     @Test
-    public void testisPalindrome(){
+    public void testisPalindrome() {
         assertFalse(palindrome.isPalindrome("cat"));
         assertTrue(palindrome.isPalindrome(""));
         assertTrue(palindrome.isPalindrome("c"));
@@ -27,9 +28,11 @@ public class TestPalindrome {
         assertTrue(palindrome.isPalindrome("racecar"));
         assertFalse(palindrome.isPalindrome("raceCaR"));
     }
+
     static CharacterComparator cc = new OffByOne();
+
     @Test
-    public void testisPalindrome2(){
+    public void testisPalindrome2() {
         assertTrue(palindrome.isPalindrome("flake", cc));
         assertTrue(palindrome.isPalindrome("%lak&", cc));
         assertTrue(palindrome.isPalindrome("a", cc));
