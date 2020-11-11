@@ -19,12 +19,12 @@ public class TestArrayDequeGold{
 		if(number < 0.5){
 			int remove1 = sad1.removeFirst();
 			int remove2 = sad2.removeFirst();
-			assertEquals("This is bad!\nremoveFirst():", remove1, remove2);
+			assertEquals("removeFirst():", remove1, remove2);
 		}
 		else{
 			int remove1 = sad1.removeLast();
 			int remove2 = sad2.removeLast();
-			assertEquals("This is bad!\nremoveLast():", remove1, remove2);
+			assertEquals("removeLast():", remove1, remove2);
 		}
 	}
 }
@@ -42,7 +42,7 @@ public class TestArrayDequeGold{
 
 	int size1 = sad1.size();
 	int size2 = sad2.size();
-	assertEquals("This is bad!\nsize():", size1, size2);
+	assertEquals("size():", size1, size2);
 }
 
 @Test
@@ -59,7 +59,7 @@ public class TestArrayDequeGold{
 	for(int i = 0; i < 10; i++){
 		Integer size1 =  sad1.get(i);
 		Integer size2 = sad2.getRecursive(i);
-		assertEquals("This is bad!\nsize():",size1, size2);
+		assertEquals("get():",size1, size2);
 	}
 }
 
