@@ -8,17 +8,17 @@ public class Palindrome {
     }
 
     //helper function used for recursion
-    private boolean isPalindrome_helper(Deque<Character> words) {
+    private boolean isPalindromehelper(Deque<Character> words) {
         Palindrome a = new Palindrome();
         if (words.size() < 2) {
             return true;
         }
-        char remove_first = words.removeFirst();
-        char remove_last = words.removeLast();
-        if (remove_first != remove_last) {
+        char removefirst = words.removeFirst();
+        char removelast = words.removeLast();
+        if (removefirst != removelast) {
             return false;
         }
-        return a.isPalindrome_helper(words);
+        return a.isPalindromehelper(words);
     }
 
     public boolean isPalindrome(String word) {
@@ -32,15 +32,15 @@ public class Palindrome {
          }
          return true;*/
         Deque words = wordToDeque(word);
-        return isPalindrome_helper(words);
+        return isPalindromehelper(words);
     }
 
     public boolean isPalindrome(String word, CharacterComparator cc) {
         Deque words = wordToDeque(word);
         while (words.size() >= 2) {
-            char remove_last = (Character) words.removeLast();
-            char remove_first = (Character) words.removeFirst();
-            if (!cc.equalChars(remove_first, remove_last)) {
+            char removelast = (Character) words.removeLast();
+            char removefirst = (Character) words.removeFirst();
+            if (!cc.equalChars(removefirst, removelast)) {
                 return false;
             }
         }

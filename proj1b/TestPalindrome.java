@@ -39,4 +39,5 @@ public class TestPalindrome {
         assertFalse(palindrome.isPalindrome("ak", cc));
         assertTrue(palindrome.isPalindrome("tufts", cc));
     }
-}    
+}   
+ 
