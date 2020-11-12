@@ -10,9 +10,7 @@ public class Dog2 implements Animal{
 	public static void main(String[] args){
 		Animal a = new Dog2();
 		Dog2 d = new Dog2();
-		a.greet(d);
-		a.sniff(d);
-		d.flatter(d);
 		a.flatter(d);
+
 	}
 }
