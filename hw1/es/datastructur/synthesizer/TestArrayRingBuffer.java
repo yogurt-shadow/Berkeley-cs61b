@@ -24,4 +24,23 @@ public class TestArrayRingBuffer {
        int b = arb.peek();
        assertEquals(1, b);
     }
+
+
+    @Test
+    public void someTest2() {
+       ArrayRingBuffer<Integer> arb2 = new ArrayRingBuffer<>(10);
+       for(int i = 0; i < 8; i++){
+        arb2.enqueue(i);
+       }
+       
+       ArrayRingBuffer<Integer> arb3 = new ArrayRingBuffer<>(10);
+       for(int i = 0; i < 8; i++){
+        arb3.enqueue(i);
+       }
+
+       assertEquals(true, arb2.equals(arb3));
+     for(int item : arb2){
+        System.out.println(item);
+       }
+    }
 }
