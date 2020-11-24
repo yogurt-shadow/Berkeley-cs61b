@@ -2,6 +2,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.HashSet;
 
+
 import static org.junit.Assert.assertEquals;
 
 public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V>{
@@ -154,7 +155,53 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V>{
 
 	@Override
 	public Iterator<K> iterator(){
-		throw new UnsupportedOperationException();
+		return new BSTiter(root, size);
+	}
+
+	private class BSTiter implements Iterator<K>{
+		private Node x;
+		private int size;
+		private Object[] keys;
+		private int index;
+		private int curr_index;
+
+		public BSTiter(Node root, int s){
+			x = root;
+			size = s;
+			keys = new Object[s];
+			index = 0;
+			curr_index = 0;
+			fill();
+		}
+
+		/**  fill the keys */
+		private void fill(){
+			fillnode(x);
+		}
+
+		private void fillnode(Node root){
+			if(root != null){
+				if(root.left != null){
+					fillnode(root.left);
+				}
+				keys[index] = root;
+				index += 1;
+				if(root.right != null){
+					fillnode(root.right);
+				}
+			}
+		}
+
+		public boolean hasNext(){
+			return curr_index < size;
+		}
+
+		public K next(){
+			Node result = (Node) keys[curr_index];
+			K result2 = result.key;
+			curr_index += 1;
+			return result2;
+		}
 	}
 
 	@Override
@@ -233,12 +280,15 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V>{
 		}
 	}
 
-	public static void main(String[] args){
-		BSTMap<String, Integer> b = new BSTMap<String, Integer>();
-		b.put("hi", 1);
-		for (int i = 0; i < 455; i++)
-			b.put("hi" + i, 1);
-		b.printInOrder();
-	}
+	public static void main(String[] args) {
+        BSTMap<String, Integer> bstMap = new BSTMap<>();
+        for (int i = 0; i < 10; i++) {
+            bstMap.put("hi" + i, 1 + i);
+        }
+        Iterator<String> itr = bstMap.iterator();
+        while (itr.hasNext()) {
+            System.out.println(itr.next());
+        }
+    }
 
 }
