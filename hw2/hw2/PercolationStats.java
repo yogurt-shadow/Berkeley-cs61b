@@ -52,24 +52,26 @@ public class PercolationStats {
         return mean() + 1.96 * stddev() / Math.sqrt(T);
     }
 
-/**
- public static void main(String[] args){
- PercolationFactory pf = new PercolationFactory();
- Stopwatch timer1 = new Stopwatch();
- PercolationStats ps1 = new PercolationStats(20, 400, pf);
- double time1 = timer1.elapsedTime();
- System.out.printf("(%.2f seconds)\n", time1);
 
- Stopwatch timer2 = new Stopwatch();
- PercolationStats ps2 = new PercolationStats(40, 400, pf);
- double time2 = timer2.elapsedTime();
- System.out.printf("(%.2f seconds)\n", time2);
+    public static void main(String[] args) {
+        /**
+         PercolationFactory pf = new PercolationFactory();
+         Stopwatch timer1 = new Stopwatch();
+         PercolationStats ps1 = new PercolationStats(20, 400, pf);
+         double time1 = timer1.elapsedTime();
+         System.out.printf("(%.2f seconds)\n", time1);
+
+         Stopwatch timer2 = new Stopwatch();
+         PercolationStats ps2 = new PercolationStats(40, 400, pf);
+         double time2 = timer2.elapsedTime();
+         System.out.printf("(%.2f seconds)\n", time2);
 
 
- Stopwatch timer3 = new Stopwatch();
- PercolationStats ps3 = new PercolationStats(20, 800, pf);
- double time3 = timer3.elapsedTime();
- System.out.printf("(%.2f seconds)\n", time3);
- }
- */
+         Stopwatch timer3 = new Stopwatch();
+         PercolationStats ps3 = new PercolationStats(20, 800, pf);
+         double time3 = timer3.elapsedTime();
+         System.out.printf("(%.2f seconds)\n", time3);
+         */
+    }
+
 }
