@@ -6,7 +6,6 @@ import edu.princeton.cs.introcs.StdStats;
 public class PercolationStats {
     private int N;
     private int T;
-    private PercolationFactory pf;
     private double[] threshold;
 
     public PercolationStats(int N, int T, PercolationFactory pf) {
@@ -15,12 +14,7 @@ public class PercolationStats {
         }
         this.N = N;
         this.T = T;
-        this.pf = pf;
         threshold = new double[T];
-        perform();
-    }
-
-    private void perform() {
         for (int i = 0; i < T; i++) {
             int thistime = 0;
             Percolation p = pf.make(N);
@@ -51,27 +45,28 @@ public class PercolationStats {
     public double confidenceHigh() {
         return mean() + 1.96 * stddev() / Math.sqrt(T);
     }
+/**
+ public static void main(String[] args) {
+ */
+    /**
+     PercolationFactory pf = new PercolationFactory();
+     Stopwatch timer1 = new Stopwatch();
+     PercolationStats ps1 = new PercolationStats(20, 400, pf);
+     double time1 = timer1.elapsedTime();
+     System.out.printf("(%.2f seconds)\n", time1);
+
+     Stopwatch timer2 = new Stopwatch();
+     PercolationStats ps2 = new PercolationStats(40, 400, pf);
+     double time2 = timer2.elapsedTime();
+     System.out.printf("(%.2f seconds)\n", time2);
 
 
-    public static void main(String[] args) {
-        /**
-         PercolationFactory pf = new PercolationFactory();
-         Stopwatch timer1 = new Stopwatch();
-         PercolationStats ps1 = new PercolationStats(20, 400, pf);
-         double time1 = timer1.elapsedTime();
-         System.out.printf("(%.2f seconds)\n", time1);
-
-         Stopwatch timer2 = new Stopwatch();
-         PercolationStats ps2 = new PercolationStats(40, 400, pf);
-         double time2 = timer2.elapsedTime();
-         System.out.printf("(%.2f seconds)\n", time2);
-
-
-         Stopwatch timer3 = new Stopwatch();
-         PercolationStats ps3 = new PercolationStats(20, 800, pf);
-         double time3 = timer3.elapsedTime();
-         System.out.printf("(%.2f seconds)\n", time3);
-         */
-    }
-
+     Stopwatch timer3 = new Stopwatch();
+     PercolationStats ps3 = new PercolationStats(20, 800, pf);
+     double time3 = timer3.elapsedTime();
+     System.out.printf("(%.2f seconds)\n", time3);
+     */
+    /**
+     }
+     */
 }
