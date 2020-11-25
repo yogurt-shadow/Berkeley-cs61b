@@ -7,6 +7,7 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
      */
 public class Percolation {
 	private WeightedQuickUnionUF sets;
+	private WeightedQuickUnionUF sets2; // no bottom
 	private int[][] grid;
 	private int[] dir1;
 	private int[] dir2;
@@ -25,6 +26,7 @@ public class Percolation {
 
 		/**  N * N stands for watersource, N * N + 1 stands for waterdrain */
 		sets = new WeightedQuickUnionUF(N * N + 2);
+		sets2 = new WeightedQuickUnionUF(N * N + 1);
 		dir1 = new int[]{0, -1, 1, 0};
 		dir2 = new int[]{-1, 0, 0, 1};
 		open_size = 0;
@@ -47,13 +49,22 @@ public class Percolation {
 		if(isOpen(row, col)){
 			return;
 		}
+		if(N == 1){
+			grid[0][0] = 0;
+			sets.union(twoD_index(0, 0), N * N);
+			sets.union(twoD_index(0, 0), N * N + 1);
+			open_size += 1;
+			return;
+		}
 		open_size += 1;
 		grid[row][col] = 0; // open that site 
 		/**  the top site */
 		if(row == 0){
 			sets.union(N * N, twoD_index(row, col));
+			sets2.union(N * N, twoD_index(row, col));
 			if(isOpen(1, col)){
 				sets.union(twoD_index(1, col), twoD_index(row, col));
+				sets2.union(twoD_index(1, col), twoD_index(row, col));
 			}
 			return;
 		}
@@ -62,6 +73,16 @@ public class Percolation {
 			sets.union(N * N + 1, twoD_index(row, col));
 			if(isOpen(N - 2, col)){
 				sets.union(twoD_index(N - 2, col), twoD_index(row, col));
+				sets2.union(twoD_index(N - 2, col), twoD_index(row, col));
+			}
+			if(col - 1 >= 0 && isOpen(row, col - 1)){
+				sets.union(twoD_index(row, col - 1), twoD_index(row, col));
+				sets2.union(twoD_index(row, col - 1), twoD_index(row, col));
+			}
+
+			if(col + 1 < N && isOpen(row, col + 1)){
+				sets.union(twoD_index(row, col + 1), twoD_index(row, col));
+				sets2.union(twoD_index(row, col + 1), twoD_index(row, col));
 			}
 			return;
 		}
@@ -71,6 +92,7 @@ public class Percolation {
 			for(int i = 1; i < 4; i++){
 				if(isOpen(row + dir1[i], col + dir2[i])){
 					sets.union(twoD_index(row, col), twoD_index(row + dir1[i], col + dir2[i]));
+					sets2.union(twoD_index(row, col), twoD_index(row + dir1[i], col + dir2[i]));
 				}
 			}
 			return;
@@ -81,6 +103,7 @@ public class Percolation {
 			for(int i = 0; i < 3; i++){
 				if(isOpen(row + dir1[i], col + dir2[i])){
 					sets.union(twoD_index(row, col), twoD_index(row + dir1[i], col + dir2[i]));
+					sets2.union(twoD_index(row, col), twoD_index(row + dir1[i], col + dir2[i]));
 				}
 			}
 			return;
@@ -91,6 +114,7 @@ public class Percolation {
 			for(int i = 0; i < 4; i++){
 				if(isOpen(row + dir1[i], col + dir2[i])){
 					sets.union(twoD_index(row, col), twoD_index(row + dir1[i], col + dir2[i]));
+					sets2.union(twoD_index(row, col), twoD_index(row + dir1[i], col + dir2[i]));
 				}
 			}
 		}
@@ -108,7 +132,7 @@ public class Percolation {
 		if(outside(row) || outside(col)){
 			throw new IndexOutOfBoundsException("row and col should be [0, N - 1]");
 		}
-		return sets.connected(twoD_index(row, col), N * N);
+		return sets2.connected(twoD_index(row, col), N * N);
 	}
 
 	public int numberOfOpenSites(){
@@ -119,8 +143,9 @@ public class Percolation {
 		return sets.connected(N * N, N * N + 1);
 	}
 
+
 	public static void main(String[] args) {
-		Percolation p1 = new Percolation(4);
+		/**
 		p1.open(2, 2);
 		p1.open(2, 3);
 		System.out.println(p1.isOpen(2, 2));
@@ -143,5 +168,7 @@ public class Percolation {
 		System.out.println(p2.percolates());
 		p2.open(0, 1);
 		System.out.println(p2.percolates());
+		*/
 	}
+	
 }

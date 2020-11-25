@@ -52,6 +52,7 @@ public class PercolationStats {
 		return mean() + 1.96 * stddev() / Math.sqrt(T);
 	}
 
+/**
 	public static void main(String[] args){
 		PercolationFactory pf = new PercolationFactory();
 		Stopwatch timer1 = new Stopwatch();
@@ -69,7 +70,6 @@ public class PercolationStats {
 		PercolationStats ps3 = new PercolationStats(20, 800, pf);
 		double time3 = timer3.elapsedTime();
 		System.out.printf("(%.2f seconds)\n", time3);
-
-
 	}
+	*/
 }
