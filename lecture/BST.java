@@ -1,7 +1,7 @@
 public class BST<Key extends  Comparable<Key>>{
-	private Key key;
-	private BST left;
-	private BST right;
+	protected Key key;
+	protected BST left;
+	protected BST right;
 
 	public BST(Key key, BST left, BST right){
 		this.key = key;
@@ -43,6 +43,10 @@ public class BST<Key extends  Comparable<Key>>{
 				return T;
 			}
 	}
-
+	public static void main(String[] args){
+		BST<Integer> a = new BST<>(3);
+		BST b = a.insert(a, 2);
+		System.out.println(b.key);
+	}
 	
 }
