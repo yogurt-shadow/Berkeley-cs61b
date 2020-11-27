@@ -1,4 +1,4 @@
-private class BST<Key>{
+public class BST<Key extends  Comparable<Key>>{
 	private Key key;
 	private BST left;
 	private BST right;
@@ -13,14 +13,14 @@ private class BST<Key>{
 		this.key = key;
 	}
 
-	public static BST find(BST T, Key sk){
+	public  BST find(BST T, Key sk){
 		if(T == null){
 			return null;
 		}
 		if(sk.equals(T.key)){
 			return T;
 		}
-		if(sk > T.key){
+		if(T.key.compareTo(sk) < 0){
 			return find(T.right, sk);
 		}
 		else{
@@ -28,15 +28,15 @@ private class BST<Key>{
 		}
 	}
 
-	public static BST insert(BST T, Key ik){
+	public  BST insert(BST T, Key ik){
 		
 			if(T == null){
 				return new BST(ik);
 			}
-			if(T.key > ik){
+			if(T.key.compareTo(ik) > 0){
 				return insert(T.left, ik);
 			}
-			if(T.key < ik){
+			if(T.key.compareTo(ik) < 0){
 				return insert(T.right, ik);
 			}
 			else{
