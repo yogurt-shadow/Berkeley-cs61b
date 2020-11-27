@@ -23,7 +23,7 @@ public class TestSimpleOomage {
 
     @Test
     public void testHashCodePerfect() {
-        /* TODO: Write a test that ensures the hashCode is perfect,
+        /* Write a test that ensures the hashCode is perfect,
           meaning no two SimpleOomages should EVER have the same
           hashCode UNLESS they have the same red, blue, and green values!
          */
@@ -60,7 +60,6 @@ public class TestSimpleOomage {
         assertTrue(hashSet.contains(ooA2));
     }
 
-    /* TODO: Uncomment this test after you finish haveNiceHashCodeSpread in OomageTestUtility */
     @Test
     public void testRandomOomagesHashCodeSpread() {
         List<Oomage> oomages = new ArrayList<>();
