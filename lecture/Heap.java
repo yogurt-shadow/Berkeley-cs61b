@@ -88,7 +88,7 @@ public class Heap<Item extends Comparable<Item>>{
 	}
 
 	public static void main(String[] args){
-		Heap<Integer> heap = new Heap<>();
+		/** Heap<Integer> heap = new Heap<>();
 		for(int i = 6; i >= 1; i--){
 			heap.insert(i);
 		}
@@ -99,6 +99,21 @@ public class Heap<Item extends Comparable<Item>>{
 		for(int i = 0; i < 1; i++){
 			heap.removeMin();
 		}
-		heap.print();
+		heap.print();*/
+		Heap<Character> h = new Heap<>();
+		h.insert('f');
+		h.print();
+		h.insert('h');
+		h.print();
+		h.insert('d');
+		h.print();
+		h.insert('b');
+		h.print();
+		h.insert('c');
+		h.print();
+		h.removeMin();
+		h.print();
+		h.removeMin();
+		h.print();
 	}
 }
