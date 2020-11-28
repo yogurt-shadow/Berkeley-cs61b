@@ -1,0 +1,83 @@
+--------------------InsertRandomSpeedTest-------------------
+
+
+ This program inserts random Strings of length L
+ Into different types of maps as <String, Integer> pairs.
+
+What would you like L to be?: 40
+
+Enter # strings to insert into ULLMap: 20
+class ULLMap: 0.00 sec
+
+Enter # strings to insert into your MyHashMap: 200
+class MyHashMap: 0.00 sec
+
+Enter # strings to insert into Java's HashMap: 2000
+Java's Built-in HashMap: 0.00 sec
+
+Would you like to try more timed-tests? (y/n)y
+
+Enter # strings to insert into ULLMap: 2000
+class ULLMap: 0.02 sec
+
+Enter # strings to insert into your MyHashMap: 2000
+class MyHashMap: 0.00 sec
+
+Enter # strings to insert into Java's HashMap: 2000
+Java's Built-in HashMap: 0.00 sec
+
+Would you like to try more timed-tests? (y/n)y
+
+Enter # strings to insert into ULLMap: 2000000
+--Stack Overflow -- couldn't add 2000000 strings of length 40.
+
+Enter # strings to insert into your MyHashMap: 2000000
+class MyHashMap: 3.73 sec
+
+Enter # strings to insert into Java's HashMap: 2000000
+Java's Built-in HashMap: 1.70 sec
+
+Would you like to try more timed-tests? (y/n)n
+
+Process finished with exit code 0
+
+
+--------------------InsertInOrderSpeedTest-------------------
+
+
+ This program inserts lexicographically increasing Stringsinto Maps as <String, Integer> pairs.
+
+Enter # strings to insert into ULLMap: 230
+class ULLMap: 0.00 sec
+
+Enter # strings to insert into MyHashMap: 230
+class MyHashMap: 0.01 sec
+
+Enter # strings to insert into Java's HashMap: 230
+Java's Built-in HashMap: 0.00 sec
+
+Would you like to try more timed-tests? (y/n): y
+
+Enter # strings to insert into ULLMap: 12321
+class ULLMap: 1.40 sec
+
+Enter # strings to insert into MyHashMap: 12321
+class MyHashMap: 0.02 sec
+
+Enter # strings to insert into Java's HashMap: 12321
+Java's Built-in HashMap: 0.01 sec
+
+Would you like to try more timed-tests? (y/n): y
+
+Enter # strings to insert into ULLMap: 89797
+--Stack Overflow -- couldn't add 89797 strings.
+
+Enter # strings to insert into MyHashMap: 89797
+class MyHashMap: 0.08 sec
+
+Enter # strings to insert into Java's HashMap: 89797
+Java's Built-in HashMap: 0.05 sec
+
+Would you like to try more timed-tests? (y/n): n
+
+Process finished with exit code 0

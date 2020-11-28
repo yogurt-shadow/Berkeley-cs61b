@@ -117,7 +117,6 @@ public class MyHashMap<K, V> implements Map61B<K, V>{
 	private void resize(){
 		Object[] keyss = new Object[size];
 		Object[] values = new Object[size];
-		Object[] buckets2 = new Object[capacity * 2];
 		Iterator<K> iter = this.iterator();
 		int i = 0;
 		while(iter.hasNext()){
