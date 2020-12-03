@@ -27,7 +27,11 @@ public class Dijkstra{
 		while(pq.size() > 0){
 			int current = pq.removeSmallest();
 			for(Edge edge: g.adj_edge(current)){
+
 				int end = edge.getend();
+				if(!pq.contains(end)){
+					continue;
+				}
 				if(distTo[end] > distTo[current] + edge.getweight()){
 					distTo[end] = distTo[current] + edge.getweight();
 					edgeTo[end] = current;

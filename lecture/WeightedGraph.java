@@ -24,6 +24,7 @@ public class WeightedGraph implements Graph{
 		if(!connected(u, v)){
 			esize += 1;
 		items[u].add(v);
+		items[v].add(u);
 	}
 	} 
 
@@ -31,10 +32,15 @@ public class WeightedGraph implements Graph{
 		if(!connected(u, v)){
 			esize += 1;
 			items[u].add(v);
+			items[v].add(u);
 			Edge edge = new Edge(u, v, weight);
 			edges.add(edge);
+			Edge edge2 = new Edge(v, u, weight);
+			edges.add(edge2);
 		}
 	}
+
+
 
 	@Override
 	public Set<Edge> getEdges(){
