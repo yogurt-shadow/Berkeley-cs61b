@@ -64,20 +64,20 @@ public class UndirectedGraph implements Graph{
 		return u_adj;
 	}
 
-	public void dfs(){
-		int[] edgeTo = new int[vsize];
+	public void dfs() {
 		Set<Integer> marked = new HashSet<>();
-		Stack<Integer> fringe = new Stack<>();
-		fringe.push(0);
-		marked.add(0);
-		while(!fringe.empty()) {
-			int current = fringe.pop();
-			System.out.print(current + " ");
+		Stack<Integer> stack = new Stack<>();
+		stack.push(0);
+		while(!stack.empty()){
+			int current = stack.pop();
+			if(marked.contains(current)){
+				continue;
+			}
+			System.out.println(current);
+			marked.add(current);
 			for(Integer neighbor: adj(current)){
 				if(!marked.contains(neighbor)){
-					fringe.push(neighbor);
-					edgeTo[neighbor] = current;
-					marked.add(neighbor);
+					stack.push(neighbor);
 				}
 			}
 		}
@@ -111,16 +111,11 @@ public class UndirectedGraph implements Graph{
 
 
 	public static void main(String[] args){
-		UndirectedGraph udg = new UndirectedGraph(9);
+		UndirectedGraph udg = new UndirectedGraph(4);
 		udg.addEdge(0, 1);
-		udg.addEdge(1, 2);
-		udg.addEdge(1, 4);
-		udg.addEdge(2, 5);
-		udg.addEdge(4, 5);
-		udg.addEdge(3, 4);
-		udg.addEdge(5, 8);
-		udg.addEdge(6, 7);
-		udg.addEdge(5, 6);
+		udg.addEdge(0, 2);
+		udg.addEdge(0, 3);
+		udg.addEdge(1, 3);
 		udg.dfs();
 		System.out.println();
 		//udg.bfs();
