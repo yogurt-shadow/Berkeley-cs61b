@@ -4,6 +4,10 @@ import byow.TileEngine.TERenderer;
 import byow.TileEngine.TETile;
 import byow.TileEngine.Tileset;
 
+import edu.princeton.cs.introcs.StdDraw;
+
+import java.awt.*;
+
 public class Engine {
     TERenderer ter = new TERenderer();
     /* Feel free to change the width and height. */
@@ -15,7 +19,96 @@ public class Engine {
      * including inputs from the main menu.
      */
     public void interactWithKeyboard() {
+
+        StdDraw.setCanvasSize(WIDTH * 16, this.HEIGHT * 16);
+        Font font = new Font("Times New Roman", Font.BOLD, 30);
+        StdDraw.setFont(font);
+        StdDraw.setXscale(0, WIDTH);
+        StdDraw.setYscale(0, HEIGHT);
+        StdDraw.clear(Color.BLACK);
+        StdDraw.enableDoubleBuffering();
+
+        StdDraw.setPenColor(Color.BLUE);
+        StdDraw.text(WIDTH / 2, HEIGHT / 5 * 4, "CS61B: The Game");
+        StdDraw.text(WIDTH / 2, HEIGHT / 2 + 2, "New Game (N/n)");
+        StdDraw.text(WIDTH / 2, HEIGHT / 2, "Load Game (L/l)");
+        StdDraw.text(WIDTH / 2, HEIGHT / 2 - 2, "Quit Game (Q/q)");
+        StdDraw.setPenColor(Color.CYAN);
+        StdDraw.text(WIDTH / 2,  7, "wzh@author");
+        StdDraw.setPenColor(Color.BLUE);
+        StdDraw.show();
+
+        StdDraw.pause(2000);
+
+        solicitNCharsInput_choice();
+
+
     }
+
+    private void solicitNCharsInput_choice(){
+        while (StdDraw.hasNextKeyTyped()) {
+            char current = StdDraw.nextKeyTyped();
+           switch (current){
+               case 'n': case 'N':
+                   drawSeed();
+                   String user = solicitNCharsInput(100);
+                   interactWithInputString('n' + user);
+               return;
+               case 'q': case 'Q': good_bye();
+               return;
+               default:
+                   return;
+           }
+        }
+    }
+
+    private void good_bye(){
+        StdDraw.clear(Color.BLACK);
+        StdDraw.setPenColor(Color.BLUE);
+        StdDraw.setFont(new Font("Times New Roman", Font.BOLD, 50));
+        StdDraw.text(WIDTH / 2, HEIGHT / 2 - 2, "Good Bye !");
+        StdDraw.show();
+    }
+
+
+    private void drawSeed(){
+        StdDraw.clear(Color.BLACK);
+        StdDraw.setPenColor(Color.BLUE);
+        StdDraw.text(WIDTH / 2, HEIGHT / 2 + 2,"SEED");
+        StdDraw.setPenColor(Color.WHITE);
+        StdDraw.filledRectangle(WIDTH / 2 , HEIGHT / 2 - 2, 8, 2);
+        StdDraw.show();
+    }
+
+    public String solicitNCharsInput(int n) {
+        //TODO: Read n letters of player input
+        int charnumber = 0;
+        String result = "";
+        while(charnumber < n) {
+            while (StdDraw.hasNextKeyTyped()) {
+                char current = StdDraw.nextKeyTyped();
+                result += current;
+                drawFrame(result);
+                charnumber += 1;
+                if(current == 's' || current == 'S'){
+                    return result;
+                }
+            }
+        }
+        return result;
+    }
+
+    public void drawFrame(String s) {
+        StdDraw.clear(Color.BLACK);
+        drawSeed();
+        StdDraw.setPenColor(Color.BLUE);
+        StdDraw.setFont(new Font("Times New Roman", Font.BOLD, 30));
+        StdDraw.text(WIDTH / 2, HEIGHT / 2 - 2, s);
+        StdDraw.show();
+    }
+
+
+
 
     /**
      * Method used for autograding and testing your code. The input string will be a series
@@ -65,10 +158,11 @@ public class Engine {
         long seed = Long.parseLong(str);
 
         TERenderer ter = new TERenderer();
-        ter.initialize(WIDTH, HEIGHT);
+        ter.initialize(WIDTH, HEIGHT, 0, 0);
 
         TETile[][] world = MapGenerator.map_generator(seed);
         ter.renderFrame(world);
+
 
         return world;
     }

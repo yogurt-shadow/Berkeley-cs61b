@@ -41,6 +41,10 @@ public class MapGenerator{
 		LockedDoorGenerator locked = new LockedDoorGenerator();
 		locked.lockeddoor(r, world);
 
+		AvatorGenerator avator = new AvatorGenerator(r);
+		avator.add_avator(world);
+
+
 
 		return world;
 

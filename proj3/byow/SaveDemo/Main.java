@@ -32,11 +32,11 @@ public class Main {
                         break;
                     case '@':
                         System.exit(0);
+                    default: e.addChar(c);
                         break;
                     case '!':
                         e.tend();
                         break;
-                    default: e.addChar(c);
                 }
             }
             e.show();

@@ -111,6 +111,7 @@ public class MemoryGame {
     public void startGame() {
         //TODO: Set any relevant variables before the game starts
         //TODO: Establish Engine loop
+
        this.round = 1;
        while(true){
            drawFrame("Round: " + round, "Relax!");
@@ -131,6 +132,7 @@ public class MemoryGame {
                this.round += 1;
            }
        }
+
     }
 
 }
