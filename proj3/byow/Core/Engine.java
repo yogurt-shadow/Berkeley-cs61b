@@ -1,5 +1,6 @@
 package byow.Core;
 
+import byow.SaveDemo.Editor;
 import byow.TileEngine.TERenderer;
 import byow.TileEngine.TETile;
 import byow.TileEngine.Tileset;
@@ -7,6 +8,7 @@ import byow.TileEngine.Tileset;
 import edu.princeton.cs.introcs.StdDraw;
 
 import java.awt.*;
+import java.io.*;
 import java.util.Map;
 
 public class Engine {
@@ -68,6 +70,15 @@ public class Engine {
                    String user = solicitNCharsInput(100);
                    interactWithInputString('n' + user);
                return;
+
+               case 'L': case 'l':
+                   ter.initialize(WIDTH, HEIGHT);
+                   Saveworld save = loadworld();
+                   TETile[][] world = save.world();
+                   display(ter, world);
+                   control(world);
+                   break;
+
                case 'q': case 'Q': good_bye();
                return;
                default:
@@ -122,6 +133,47 @@ public class Engine {
         StdDraw.setFont(new Font("Times New Roman", Font.BOLD, 30));
         StdDraw.text(WIDTH / 2, HEIGHT / 2 - 2, s);
         StdDraw.show();
+    }
+
+    private void saveworld(Saveworld saveworld) {
+        File f = new File("./proj3_save_data");
+        try {
+            if (!f.exists()) {
+                f.createNewFile();
+            }
+            FileOutputStream fs = new FileOutputStream(f);
+            ObjectOutputStream os = new ObjectOutputStream(fs);
+            os.writeObject(saveworld);
+        }  catch (FileNotFoundException e) {
+            System.out.println("file not found");
+            System.exit(0);
+        } catch (IOException e) {
+            System.out.println(e);
+            System.exit(0);
+        }
+    }
+
+    private  Saveworld loadworld() {
+        File f = new File("./proj3_save_data");
+        if (f.exists()) {
+            try {
+                FileInputStream fs = new FileInputStream(f);
+                ObjectInputStream os = new ObjectInputStream(fs);
+                return (Saveworld) os.readObject();
+            } catch (FileNotFoundException e) {
+                System.out.println("file not found");
+                System.exit(0);
+            } catch (IOException e) {
+                System.out.println(e);
+                System.exit(0);
+            } catch (ClassNotFoundException e) {
+                System.out.println("class not found");
+                System.exit(0);
+            }
+        }
+
+        /* In the case no Editor has been saved yet, we return a new one. */
+        return new Saveworld(interactWithInputString("n1232s"));
     }
 
 
@@ -199,6 +251,7 @@ public class Engine {
     }
 
     private void control(TETile[][] world){
+        boolean wait = false;
         StdDraw.clear();
         display(ter, world);
         StdDraw.pause(1000);
@@ -206,6 +259,7 @@ public class Engine {
             char current = StdDraw.nextKeyTyped();
             switch(current){
                 case 'a': case 'A':
+                    wait = false;
                     if(world[avator_x - 1][avator_y].equals(Tileset.WALL)){
                     break;
                 }
@@ -223,6 +277,7 @@ public class Engine {
                     }
 
                 case 'w': case 'W':
+                    wait = false;
                     if(world[avator_x][avator_y + 1].equals(Tileset.WALL)){
                         break;
                     }
@@ -239,6 +294,7 @@ public class Engine {
                         break;
                     }
                 case 's': case 'S':
+                    wait = false;
                     if(world[avator_x][avator_y - 1].equals(Tileset.WALL)){
                         break;
                     }
@@ -255,6 +311,7 @@ public class Engine {
                         break;
                     }
                 case 'd': case 'D':
+                    wait = false;
                     if(world[avator_x + 1][avator_y].equals(Tileset.WALL)){
                         break;
                     }
@@ -270,6 +327,11 @@ public class Engine {
                         win();
                         break;
                     }
+                case ':': wait = true; break;
+                case 'q':
+                    saveworld(new Saveworld(world));
+                    break;
+
                 default:
                     return;
             }
