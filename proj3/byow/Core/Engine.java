@@ -2,6 +2,7 @@ package byow.Core;
 
 import byow.TileEngine.TERenderer;
 import byow.TileEngine.TETile;
+import byow.TileEngine.Tileset;
 
 public class Engine {
     TERenderer ter = new TERenderer();
@@ -46,7 +47,29 @@ public class Engine {
         // See proj3.byow.InputDemo for a demo of how you can make a nice clean interface
         // that works for many different input types.
 
-        TETile[][] finalWorldFrame = null;
-        return finalWorldFrame;
+        String str = "";
+        boolean seed_check = false;
+        boolean seed_completed = false;
+        for(int i = 0; i < input.length(); i++){
+            if(input.charAt(i) == 's' || input.charAt(i) == 'S'){
+                seed_check = false;
+                seed_completed = true;
+            }
+            if(seed_check && !seed_completed){
+                str += input.charAt(i);
+            }
+            if(input.charAt(i) == 'n' || input.charAt(i) == 'N'){
+                seed_check = true;
+            }
+        }
+        long seed = Long.parseLong(str);
+
+        TERenderer ter = new TERenderer();
+        ter.initialize(WIDTH, HEIGHT);
+
+        TETile[][] world = MapGenerator.map_generator(seed);
+        ter.renderFrame(world);
+
+        return world;
     }
 }

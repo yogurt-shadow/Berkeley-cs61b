@@ -13,32 +13,32 @@ public class RoomGenerator{
 	private List<Room> rooms;
 	private final static int WIDTH = MapGenerator.WIDTH;
 	private final static int HEIGHT = MapGenerator.HEIGHT;
+	private Random r;
 
-	public RoomGenerator(){
+	public RoomGenerator(Random r){
 		rooms = new ArrayList<>();
+		this.r = r;
 	}
 
 	private Point randomPoint(){
-		Random r = new Random();
-		int x = RandomUtils.uniform(r, 5, WIDTH - 5);
-		int y = RandomUtils.uniform(r, 3, HEIGHT - 3);
+		int x = RandomUtils.uniform(r, 3, WIDTH - 5);
+		int y = RandomUtils.uniform(r, 2, HEIGHT - 3);
 		return new Point(x, y);
 
 	}
 
 	private int randomlength(String s){
-		Random r = new Random();
 		switch(s){
 			case "height": return RandomUtils.uniform(r, 2, HEIGHT / 4);
-			case "width": return RandomUtils.uniform(r, 4, WIDTH / 4);
+			case "width": return RandomUtils.uniform(r, 4, WIDTH / 6);
 			default: return 0;
 		}
 	}
 
 	private boolean contact_board(int x, String s){
 		switch(s){
-			case "width": return (x >= WIDTH - 1 || x < 0);
-			case "height": return (x >= HEIGHT - 1 || x < 0);
+			case "width": return (x >= WIDTH - 1 || x <= 0);
+			case "height": return (x >= HEIGHT - 1 || x <= 0);
 			default: return false;
 		}
 	}

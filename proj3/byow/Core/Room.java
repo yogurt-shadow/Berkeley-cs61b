@@ -47,5 +47,19 @@ public class Room{
 		return start.y() + height - 1;
 	}
 
+	public List<Point> edges(){
+		List<Point> edges = new ArrayList<>();
+		for(int i = left(); i <= right(); i++){
+			edges.add(new Point(i, bottom()));
+			edges.add(new Point(i, up()));
+		}
+
+		for(int j = bottom(); j <= up(); j++){
+			edges.add(new Point(left(), j));
+			edges.add(new Point(right(), j));
+		}
+		return edges;
+	}
+
 
 }

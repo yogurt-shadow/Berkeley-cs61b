@@ -6,10 +6,11 @@ import byow.TileEngine.Tileset;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MapGenerator{
-	static final int WIDTH = 60;
-    static final int HEIGHT = 30;
+	static final int WIDTH = Engine.WIDTH;
+    static final int HEIGHT = Engine.HEIGHT;
 
 
    private static void fillworld(TETile[][] world){
@@ -20,21 +21,59 @@ public class MapGenerator{
 		}
 	}
 
+	public static TETile[][] map_generator(long seed){
+   		Random r = new Random(seed);
+		TETile[][] world = new TETile[WIDTH][HEIGHT];
+		fillworld(world);
+
+		RoomGenerator rg = new RoomGenerator(r);
+
+		int room_number = RandomUtils.uniform(r, 8, 12);
+		rg.rooms_generator(room_number, world);
+		List<Room> rooms = rg.room_list();
+
+		HallwayGenerator hg = new HallwayGenerator(r, rooms);
+		hg.hallways_generator(world);
+		List<Hallway> hallways = hg.hallway_list();
+
+		WallGenerator.fillwall(world);
+
+		LockedDoorGenerator locked = new LockedDoorGenerator();
+		locked.lockeddoor(r, world);
+
+
+		return world;
+
+
+	}
+
 
     public static void main(String[] args){
-
+		Random r = new Random(124);
     	TERenderer ter = new TERenderer();
         ter.initialize(WIDTH, HEIGHT);
 
 		TETile[][] world = new TETile[WIDTH][HEIGHT];
 		fillworld(world);
 
-		RoomGenerator rg = new RoomGenerator();
-		rg.rooms_generator(15, world);
+		RoomGenerator rg = new RoomGenerator(r);
+
+		int room_numbers = RandomUtils.uniform(r, 8, 12);
+		rg.rooms_generator(room_numbers, world);
 		List<Room> rooms = rg.room_list();
+
+		HallwayGenerator hg = new HallwayGenerator(r, rooms);
+		hg.hallways_generator(world);
+		List<Hallway> hallways = hg.hallway_list();
+
+		WallGenerator.fillwall(world);
+
+		LockedDoorGenerator locked = new LockedDoorGenerator();
+		locked.lockeddoor(r, world);
 
 		ter.renderFrame(world);
 
 
     }
+
 }
