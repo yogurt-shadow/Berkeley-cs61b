@@ -113,7 +113,10 @@ public class MemoryGame {
         //TODO: Establish Engine loop
        this.round = 1;
        while(true){
-           drawFrame("Round: " + round, "Watch");
+           drawFrame("Round: " + round, "Relax!");
+           StdDraw.pause(1000);
+           drawFrame("Get Ready!", "Ready!");
+           StdDraw.pause(1000);
            String current = generateRandomString(round);
            flashSequence(current);
 
