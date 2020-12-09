@@ -43,7 +43,14 @@ public class Engine {
         StdDraw.setPenColor(Color.CYAN);
         StdDraw.text(WIDTH / 2,  7, "wzh@author");
         StdDraw.setPenColor(Color.BLUE);
+        StdDraw.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        StdDraw.setPenColor(Color.GREEN);
+        StdDraw.text(WIDTH / 2, 5, "version 3.0");
+        StdDraw.setPenColor(Color.GREEN);
+        StdDraw.text(WIDTH / 2, 3, "Date: Dec. 9, 2020");
         StdDraw.show();
+
+        StdDraw.setFont(new Font("Times New Roman", Font.BOLD, 30));
 
         StdDraw.pause(1500);
 
@@ -74,6 +81,9 @@ public class Engine {
         StdDraw.setPenColor(Color.BLUE);
         StdDraw.setFont(new Font("Times New Roman", Font.BOLD, 50));
         StdDraw.text(WIDTH / 2, HEIGHT / 2 - 2, "Good Bye !");
+        StdDraw.setPenColor(Color.CYAN);
+        StdDraw.setFont(new Font("Times New Roman", Font.BOLD, 30));
+        StdDraw.text(WIDTH / 2,  7, "wzh@author");
         StdDraw.show();
     }
 
@@ -190,8 +200,8 @@ public class Engine {
 
     private void control(TETile[][] world){
         StdDraw.clear();
-       display(ter, world);
-       StdDraw.pause(1000);
+        display(ter, world);
+        StdDraw.pause(1000);
         while(StdDraw.hasNextKeyTyped()){
             char current = StdDraw.nextKeyTyped();
             switch(current){
@@ -203,11 +213,60 @@ public class Engine {
                         world[avator_x - 1][avator_y] = Tileset.AVATAR;
                         world[avator_x][avator_y] = Tileset.FLOOR;
                         avator_x -= 1;
-                        ter.renderFrame(world);
+                        display(ter, world);
                         StdDraw.pause(800);
                         break;
                     }
                     if(world[avator_x - 1][avator_y].equals(Tileset.LOCKED_DOOR)){
+                        win();
+                        break;
+                    }
+
+                case 'w': case 'W':
+                    if(world[avator_x][avator_y + 1].equals(Tileset.WALL)){
+                        break;
+                    }
+                    if(world[avator_x][avator_y + 1].equals(Tileset.FLOOR)){
+                        world[avator_x][avator_y + 1] = Tileset.AVATAR;
+                        world[avator_x][avator_y] = Tileset.FLOOR;
+                        avator_y += 1;
+                        display(ter, world);
+                        StdDraw.pause(800);
+                        break;
+                    }
+                    if(world[avator_x][avator_y + 1].equals(Tileset.LOCKED_DOOR)){
+                        win();
+                        break;
+                    }
+                case 's': case 'S':
+                    if(world[avator_x][avator_y - 1].equals(Tileset.WALL)){
+                        break;
+                    }
+                    if(world[avator_x][avator_y - 1].equals(Tileset.FLOOR)){
+                        world[avator_x][avator_y - 1] = Tileset.AVATAR;
+                        world[avator_x][avator_y] = Tileset.FLOOR;
+                        avator_y -= 1;
+                        display(ter, world);
+                        StdDraw.pause(800);
+                        break;
+                    }
+                    if(world[avator_x][avator_y - 1].equals(Tileset.LOCKED_DOOR)){
+                        win();
+                        break;
+                    }
+                case 'd': case 'D':
+                    if(world[avator_x + 1][avator_y].equals(Tileset.WALL)){
+                        break;
+                    }
+                    if(world[avator_x + 1][avator_y].equals(Tileset.FLOOR)){
+                        world[avator_x + 1][avator_y] = Tileset.AVATAR;
+                        world[avator_x][avator_y] = Tileset.FLOOR;
+                        avator_x += 1;
+                        display(ter, world);
+                        StdDraw.pause(800);
+                        break;
+                    }
+                    if(world[avator_x + 1][avator_y].equals(Tileset.LOCKED_DOOR)){
                         win();
                         break;
                     }
@@ -222,6 +281,9 @@ public class Engine {
         StdDraw.setPenColor(Color.BLUE);
         StdDraw.setFont(new Font("Times New Roman", Font.BOLD, 50));
         StdDraw.text(WIDTH / 2, HEIGHT / 2 - 2, "YOU WIN !");
+        StdDraw.setPenColor(Color.CYAN);
+        StdDraw.setFont(new Font("Times New Roman", Font.BOLD, 30));
+        StdDraw.text(WIDTH / 2,  7, "wzh@author");
         StdDraw.show();
     }
 }
