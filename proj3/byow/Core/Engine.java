@@ -7,6 +7,7 @@ import byow.TileEngine.Tileset;
 import edu.princeton.cs.introcs.StdDraw;
 
 import java.awt.*;
+import java.util.Map;
 
 public class Engine {
     TERenderer ter = new TERenderer();
@@ -14,11 +15,17 @@ public class Engine {
     public static final int WIDTH = 80;
     public static final int HEIGHT = 30;
 
+    private int avator_x;
+    private int avator_y;
+
+    private String inputsource;
+
     /**
      * Method used for exploring a fresh world. This method should handle all inputs,
      * including inputs from the main menu.
      */
     public void interactWithKeyboard() {
+        inputsource = "keyboard";
 
         StdDraw.setCanvasSize(WIDTH * 16, this.HEIGHT * 16);
         Font font = new Font("Times New Roman", Font.BOLD, 30);
@@ -38,7 +45,7 @@ public class Engine {
         StdDraw.setPenColor(Color.BLUE);
         StdDraw.show();
 
-        StdDraw.pause(2000);
+        StdDraw.pause(1500);
 
         solicitNCharsInput_choice();
 
@@ -157,13 +164,64 @@ public class Engine {
         }
         long seed = Long.parseLong(str);
 
-        TERenderer ter = new TERenderer();
+
         ter.initialize(WIDTH, HEIGHT, 0, 0);
 
-        TETile[][] world = MapGenerator.map_generator(seed);
-        ter.renderFrame(world);
+        MapGenerator mg = new MapGenerator();
+
+        TETile[][] world = mg.map_generator(seed);
+       avator_x = mg.avator_x();
+        avator_y = mg.avator_y();
+
+       display(ter, world);
+
+
+        if(inputsource == "keyboard"){
+            control(world);
+        }
 
 
         return world;
+    }
+
+    private void display(TERenderer ter, TETile[][] world){
+        ter.renderFrame(world);
+    }
+
+    private void control(TETile[][] world){
+        StdDraw.clear();
+       display(ter, world);
+       StdDraw.pause(1000);
+        while(StdDraw.hasNextKeyTyped()){
+            char current = StdDraw.nextKeyTyped();
+            switch(current){
+                case 'a': case 'A':
+                    if(world[avator_x - 1][avator_y].equals(Tileset.WALL)){
+                    break;
+                }
+                    if(world[avator_x - 1][avator_y].equals(Tileset.FLOOR)){
+                        world[avator_x - 1][avator_y] = Tileset.AVATAR;
+                        world[avator_x][avator_y] = Tileset.FLOOR;
+                        avator_x -= 1;
+                        ter.renderFrame(world);
+                        StdDraw.pause(800);
+                        break;
+                    }
+                    if(world[avator_x - 1][avator_y].equals(Tileset.LOCKED_DOOR)){
+                        win();
+                        break;
+                    }
+                default:
+                    return;
+            }
+        }
+    }
+
+    private void win(){
+        StdDraw.clear(Color.BLACK);
+        StdDraw.setPenColor(Color.BLUE);
+        StdDraw.setFont(new Font("Times New Roman", Font.BOLD, 50));
+        StdDraw.text(WIDTH / 2, HEIGHT / 2 - 2, "YOU WIN !");
+        StdDraw.show();
     }
 }

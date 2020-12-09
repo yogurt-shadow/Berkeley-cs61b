@@ -12,6 +12,9 @@ public class MapGenerator{
 	static final int WIDTH = Engine.WIDTH;
     static final int HEIGHT = Engine.HEIGHT;
 
+    private int avator_x;
+    private int avator_y;
+
 
    private static void fillworld(TETile[][] world){
 		for(int i = 0; i < world.length; i++){
@@ -21,7 +24,7 @@ public class MapGenerator{
 		}
 	}
 
-	public static TETile[][] map_generator(long seed){
+	public TETile[][] map_generator(long seed){
    		Random r = new Random(seed);
 		TETile[][] world = new TETile[WIDTH][HEIGHT];
 		fillworld(world);
@@ -44,11 +47,22 @@ public class MapGenerator{
 		AvatorGenerator avator = new AvatorGenerator(r);
 		avator.add_avator(world);
 
+		this.avator_x = avator.x();
+		this.avator_y = avator.y();
+
 
 
 		return world;
 
 
+	}
+
+	public int avator_x(){
+   		return avator_x;
+	}
+
+	public int avator_y(){
+   		return avator_y;
 	}
 
 
