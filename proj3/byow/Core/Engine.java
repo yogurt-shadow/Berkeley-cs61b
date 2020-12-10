@@ -98,7 +98,18 @@ public class Engine {
         StdDraw.clear(Color.BLACK);
         StdDraw.setPenColor(Color.BLUE);
         StdDraw.setFont(new Font("Times New Roman", Font.BOLD, 50));
-        StdDraw.text(WIDTH / 2, HEIGHT / 2 - 2, "Good Bye !");
+        StdDraw.text(WIDTH / 2, HEIGHT / 2 + 3, "Good Bye !");
+        StdDraw.setPenColor(Color.CYAN);
+        StdDraw.setFont(new Font("Times New Roman", Font.BOLD, 30));
+        StdDraw.text(WIDTH / 2,  7, "wzh@author");
+        StdDraw.show();
+    }
+
+    private void save_display(){
+        StdDraw.clear(Color.BLACK);
+        StdDraw.setPenColor(Color.BLUE);
+        StdDraw.setFont(new Font("Times New Roman", Font.BOLD, 50));
+        StdDraw.text(WIDTH / 2, HEIGHT / 2 + 3, "Game Saved !");
         StdDraw.setPenColor(Color.CYAN);
         StdDraw.setFont(new Font("Times New Roman", Font.BOLD, 30));
         StdDraw.text(WIDTH / 2,  7, "wzh@author");
@@ -310,7 +321,7 @@ public class Engine {
                     data.add(Integer.toString(avator_x));
                     data.add(Integer.toString(avator_y));
                     saveworld(data);
-                    good_bye();
+                   save_display();
                     break;
 
                 default:
