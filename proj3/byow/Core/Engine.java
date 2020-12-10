@@ -9,7 +9,10 @@ import edu.princeton.cs.introcs.StdDraw;
 
 import java.awt.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Map;
+
+import java.util.List;
 
 public class Engine {
     TERenderer ter = new TERenderer();
@@ -19,6 +22,8 @@ public class Engine {
 
     private int avator_x;
     private int avator_y;
+
+    private boolean load = false;
 
     private String inputsource;
 
@@ -72,11 +77,13 @@ public class Engine {
                return;
 
                case 'L': case 'l':
-                   ter.initialize(WIDTH, HEIGHT);
-                   Saveworld save = loadworld();
-                   TETile[][] world = save.world();
-                   display(ter, world);
-                   control(world);
+                 load = true;
+                 List<String> parameters = TestSave_load.readTxtFileIntoStringArrList("F:/coding/cs61b/proj3/save_load.txt");
+                 this.avator_x = Integer.parseInt(parameters.get(1));
+                 this.avator_y = Integer.parseInt(parameters.get(2));
+                 String seed = parameters.get(0);
+                 interactWithInputString(seed);
+
                    break;
 
                case 'q': case 'Q': good_bye();
@@ -135,48 +142,9 @@ public class Engine {
         StdDraw.show();
     }
 
-    private void saveworld(Saveworld saveworld) {
-        File f = new File("./proj3_save_data");
-        try {
-            if (!f.exists()) {
-                f.createNewFile();
-            }
-            FileOutputStream fs = new FileOutputStream(f);
-            ObjectOutputStream os = new ObjectOutputStream(fs);
-            os.writeObject(saveworld);
-        }  catch (FileNotFoundException e) {
-            System.out.println("file not found");
-            System.exit(0);
-        } catch (IOException e) {
-            System.out.println(e);
-            System.exit(0);
-        }
-    }
-
-    private  Saveworld loadworld() {
-        File f = new File("./proj3_save_data");
-        if (f.exists()) {
-            try {
-                FileInputStream fs = new FileInputStream(f);
-                ObjectInputStream os = new ObjectInputStream(fs);
-                return (Saveworld) os.readObject();
-            } catch (FileNotFoundException e) {
-                System.out.println("file not found");
-                System.exit(0);
-            } catch (IOException e) {
-                System.out.println(e);
-                System.exit(0);
-            } catch (ClassNotFoundException e) {
-                System.out.println("class not found");
-                System.exit(0);
-            }
-        }
-
-        /* In the case no Editor has been saved yet, we return a new one. */
-        return new Saveworld(interactWithInputString("n1232s"));
-    }
-
-
+  private void saveworld(List<String> data){
+        TestSave_load.writefiletxt(data, "F:/coding/cs61b/proj3/save_load.txt");
+  }
 
 
     /**
@@ -232,14 +200,22 @@ public class Engine {
         MapGenerator mg = new MapGenerator();
 
         TETile[][] world = mg.map_generator(seed);
-       avator_x = mg.avator_x();
-        avator_y = mg.avator_y();
+
+        if(!load) {
+            avator_x = mg.avator_x();
+            avator_y = mg.avator_y();
+        }
+
+        if(load){
+            world[mg.avator_x()][mg.avator_y()] = Tileset.FLOOR;
+            world[avator_x][avator_y] = Tileset.AVATAR;
+        }
 
        display(ter, world);
 
 
         if(inputsource == "keyboard"){
-            control(world);
+            control(world, input);
         }
 
 
@@ -247,10 +223,11 @@ public class Engine {
     }
 
     private void display(TERenderer ter, TETile[][] world){
-        ter.renderFrame(world);
+
+        StdDraw.clear(Color.BLACK);ter.renderFrame(world);
     }
 
-    private void control(TETile[][] world){
+    private void control(TETile[][] world, String input){
         boolean wait = false;
         StdDraw.clear();
         display(ter, world);
@@ -327,9 +304,13 @@ public class Engine {
                         win();
                         break;
                     }
-                case ':': wait = true; break;
                 case 'q':
-                    saveworld(new Saveworld(world));
+                    List<String> data = new ArrayList<>();
+                    data.add(input);
+                    data.add(Integer.toString(avator_x));
+                    data.add(Integer.toString(avator_y));
+                    saveworld(data);
+                    good_bye();
                     break;
 
                 default:
@@ -342,7 +323,7 @@ public class Engine {
         StdDraw.clear(Color.BLACK);
         StdDraw.setPenColor(Color.BLUE);
         StdDraw.setFont(new Font("Times New Roman", Font.BOLD, 50));
-        StdDraw.text(WIDTH / 2, HEIGHT / 2 - 2, "YOU WIN !");
+        StdDraw.text(WIDTH / 2, HEIGHT / 2  + 4, "YOU WIN");
         StdDraw.setPenColor(Color.CYAN);
         StdDraw.setFont(new Font("Times New Roman", Font.BOLD, 30));
         StdDraw.text(WIDTH / 2,  7, "wzh@author");
