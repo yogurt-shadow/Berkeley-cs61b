@@ -15,7 +15,6 @@
  *  with with site (0, 0) in the upper left-hand corner.
  *
  ******************************************************************************/
-package hw2;
 
 import java.awt.Font;
 
@@ -83,6 +82,7 @@ public class PercolationVisualizer {
 
     public static void main(String[] args) {
         String filename = args[0];
+        System.out.println(filename);
         simulateFromFile(filename);
     }
 }

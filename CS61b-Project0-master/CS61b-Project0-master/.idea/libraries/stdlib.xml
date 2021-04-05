@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="stdlib">
+    <CLASSES>
+      <root url="jar://D:/java_jar/stdlib.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://D:/java_jar/stdlib.jar!/" />
+    </SOURCES>
+  </library>
+</component>
